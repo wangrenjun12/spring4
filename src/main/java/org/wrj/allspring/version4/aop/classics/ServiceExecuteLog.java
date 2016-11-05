@@ -16,7 +16,7 @@ public class ServiceExecuteLog implements MethodInterceptor {
 		long runBegin = System.currentTimeMillis();
 		Object result = invocation.proceed();
 		long runEnd = System.currentTimeMillis();
-		System.out.printf("Run Class %s %s Argument %s Cost %s millsecond(s) ",
+		System.out.printf("Run Class %s %s Argument %s Cost %s millsecond(s) %n ",
 				className, methodName, Arrays.toString(args),
 				(runEnd - runBegin));
 		return result;

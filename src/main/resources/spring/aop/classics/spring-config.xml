@@ -7,7 +7,7 @@
 	<!-- <context:component-scan base-package="org.wrj.allspring.version4.aop.classics" 
 		/> -->
 
-	<bean id="payService" class="org.wrj.allspring.version4.aop.classics.PayServiceImpl">
+	<bean id="payServiceTarget" class="org.wrj.allspring.version4.aop.classics.PayServiceImpl">
 	</bean>
 
 
@@ -16,23 +16,27 @@
 	</bean>
 
 
-	<bean id="concurrencyThrottleInterceptor"
-		class="org.springframework.aop.interceptor.ConcurrencyThrottleInterceptor"></bean>
 
-
-	<!-- <bean name="beanNameAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> 
-		<property name="beanNames"> <value>payService</value> </property> <property 
-		name="interceptorNames"> <list> <value>serviceExecuteLog</value> <value>concurrencyThrottleInterceptor</value> 
-		</list> </property> </bean> -->
-	<bean id="logProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<!--这里代理的是接口 -->
+	<bean name="beanNameAutoProxyCreator"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<value>payServiceTarget</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>serviceExecuteLog</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="payService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="proxyInterfaces">
 			<value>org.wrj.allspring.version4.aop.classics.PayService</value>
 		</property>
 
 		<!--是ProxyFactoryBean要代理的目标类 -->
 		<property name="target">
-			<ref bean="payService" />
+			<ref bean="payServiceTarget" />
 		</property>
 
 		<!--程序中的Advice -->
