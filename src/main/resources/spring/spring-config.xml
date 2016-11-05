@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- <context:component-scan base-package="org.wrj.allspring.version4.aop.classics" 
+		/> -->
+
+	<bean id="payService" class="org.wrj.allspring.version4.aop.classics.PayServiceImpl">
+	</bean>
+
+
+	<bean id="serviceExecuteLog"
+		class="org.wrj.allspring.version4.aop.classics.ServiceExecuteLog">
+	</bean>
+
+
+	<bean id="concurrencyThrottleInterceptor"
+		class="org.springframework.aop.interceptor.ConcurrencyThrottleInterceptor"></bean>
+
+
+	<!-- <bean name="beanNameAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> 
+		<property name="beanNames"> <value>payService</value> </property> <property 
+		name="interceptorNames"> <list> <value>serviceExecuteLog</value> <value>concurrencyThrottleInterceptor</value> 
+		</list> </property> </bean> -->
+	<bean id="logProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!--这里代理的是接口 -->
+		<property name="proxyInterfaces">
+			<value>org.wrj.allspring.version4.aop.classics.PayService</value>
+		</property>
+
+		<!--是ProxyFactoryBean要代理的目标类 -->
+		<property name="target">
+			<ref bean="payService" />
+		</property>
+
+		<!--程序中的Advice -->
+		<property name="interceptorNames">
+			<list>
+				<value>serviceExecuteLog</value>
+			</list>
+		</property>
+	</bean>
+</beans>
