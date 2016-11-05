@@ -28,7 +28,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="payService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="proxyInterfaces">
 			<value>org.wrj.allspring.version4.aop.classics.PayService</value>

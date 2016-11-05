@@ -4,9 +4,7 @@ import java.util.Arrays;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.springframework.stereotype.Service;
 
-@Service("serviceExecuteLog")
 public class ServiceExecuteLog implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation invocation) throws Throwable {
