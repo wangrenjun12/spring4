@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,6 +20,13 @@ public class ServiceExecuteLog {
 	@After("execution (public * *(..))")
 	public void afterExecute(JoinPoint jp){
 		System.out.println("afterExecute payOrder()");
+	}
+	
+	
+	@AfterReturning("execution (public * *(..))")
+	public void afterRetrning(JoinPoint jp){
+		System.out.println("afterRetrning payOrder()");
+		
 	}
 	
 	

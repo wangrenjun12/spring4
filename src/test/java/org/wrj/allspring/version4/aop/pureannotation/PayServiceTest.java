@@ -15,6 +15,6 @@ public class PayServiceTest {
 		ps.payOrder("ZSYH0001", "20161105P01");
 		//ps.payOrdreForException();
 		
-		ps.payOrdreForException();
+		//ps.payOrdreForException();
 	}
 }
