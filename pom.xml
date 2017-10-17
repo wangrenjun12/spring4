@@ -7,7 +7,7 @@
     <version>${spring-internal-version}</version>
     <packaging>pom</packaging>
 
-    <name>spring-internal</name>
+    <name>spring-internal-parent</name>
     <url>http://maven.apache.org</url>
 
     <modules>
